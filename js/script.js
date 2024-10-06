@@ -1,4 +1,4 @@
-function computerChoice(computerChoice){
+function getComputerChoice(computerChoice){
   const randomNumber = Math.floor(Math.random() * 9);
   if(randomNumber <= 2){
     computerChoice = 'rock';
@@ -11,4 +11,4 @@ function computerChoice(computerChoice){
   }
   console.log(computerChoice);
 }
-computerChoice();
+getComputerChoice();
