@@ -1,5 +1,6 @@
 function getComputerChoice(){
   const randomNumber = Math.floor(Math.random() * 9);
+  let computerChoice = '';
   if(randomNumber <= 2){
     computerChoice = 'rock';
   }
@@ -13,7 +14,7 @@ function getComputerChoice(){
 }
 
 function getHumanChoice(){
-  humanChoice = prompt('What would you like to pick: Rock, Paper or Scissors?').toLowerCase();
+  const humanChoice = prompt('What would you like to pick: Rock, Paper or Scissors?').toLowerCase();
   return humanChoice;
 }
 
@@ -22,8 +23,8 @@ let computerScore = 0;
 
 function playRound(){
   
-  getComputerChoice();
-  getHumanChoice();
+  const computerChoice = getComputerChoice();
+  const humanChoice = getHumanChoice();
 
   console.log(`computerChoice = ${computerChoice}`);
   console.log(`humanChoice = ${humanChoice}`);
