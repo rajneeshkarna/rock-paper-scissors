@@ -11,77 +11,112 @@ function getComputerChoice(){
   }
 }
 
-function getHumanChoice(){
-  const humanChoice = prompt('What would you like to pick: Rock, Paper or Scissors?');
-  return humanChoice;
-}
-
 let humanScore = 0;
 let computerScore = 0;
 
 function playRound(humanChoice, computerChoice){
 
-  humanChoice = humanChoice.toLowerCase();
-
   if (computerChoice === 'rock') {
     if(humanChoice === 'rock'){
-      console.log('It\'s a tie!');
+      result.textContent = 'It\'s a tie!';
     }
     else if(humanChoice === 'paper'){
-      console.log('You won! Paper beats Rock.');
+      result.textContent = 'You win! Paper beats Rock.';
       humanScore++;
     }
     else if(humanChoice === 'scissors'){
-      console.log('You lose! Rock beats Scissors.');
+      result.textContent = 'You lose! Rock beats Scissors.';
       computerScore++;
     }
   }
 
   else if(computerChoice === 'paper'){
     if(humanChoice === 'rock'){
-      console.log('You lose! Paper beats Rock.');
+      result.textContent = 'You lose! Paper beats Rock.';
       computerScore++;
     }
     else if(humanChoice === 'paper'){
-      console.log('It\'s a tie!');
+      result.textContent = 'It\'s a tie!';
     }
     else if(humanChoice === 'scissors'){
-      console.log('You win! Scissors beats Paper.');
+      result.textContent = 'You win! Scissors beats Paper.';
       humanScore++;
     }
   }
 
   else if(computerChoice === 'scissors'){
     if(humanChoice === 'rock'){
-      console.log('You win! Rock beats Scissors.');
+      result.textContent = 'You win! Rock beats Scissors.';
       humanScore++;
     }
     else if(humanChoice === 'paper'){
-      console.log('You lose! Scissors beats paper.');
+      result.textContent = 'You lose! Scissors beats paper.';
       computerScore++;
     }
     else if(humanChoice === 'scissors'){
-      console.log('It\'s a tie!');
+      result.textContent = 'It\'s a tie!';
     }
   }
-  
-}
 
-function playGame(){
-  for(let i = 0; i < 5; i++){
-    const computerSelection = getComputerChoice();
-    const humanSelection = getHumanChoice();
-    playRound(humanSelection, computerSelection);
-  }
-  if(computerScore > humanScore){
-    console.log(`Computer won by ${computerScore - humanScore} round.`);
-  }
-  else if(humanScore > computerScore) {
-    console.log(`You won by ${humanScore - computerScore} round.`);
-  }
-  else {
-    console.log('It\'s a tie!');
+  humanScored.textContent = `You score: ${humanScore}`;
+  computerScored.textContent = `Computer Score: ${computerScore}`;
+
+  if(computerScore === 5 || humanScore === 5){
+    if(computerScore === 5) {
+    finalResult.textContent = `You lose the game by ${comuterScore - humanScore} point`;
+}
+ else {
+     finalResult.textContent = `You win the game by ${humanScore - computerScore} point`;
+}
+  disableButtons();
   }
 }
 
-playGame();
+function disableButtons() {
+  rock.disabled = true;
+  paper.disabled = true;
+  scissors.disabled = true;
+}
+
+const container = document.querySelector('.container');
+
+const rock = document.createElement('button');
+rock.setAttribute('id', 'rock-btn');
+rock.textContent = 'Rock';
+container.appendChild(rock);
+rock.addEventListener('click', () => {
+const computerSelection = getComputerChoice();
+playRound('rock', computerSelection)
+});
+
+const paper = document.createElement('button');
+paper.setAttribute('id', 'paper-btn');
+paper.textContent = 'Paper';
+container.appendChild(paper);
+paper.addEventListener('click', () => {
+const computerSelection = getComputerChoice();
+playRound('paper', computerSelection)
+});
+
+const scissors = document.createElement('button');
+scissors.setAttribute('id', 'scissors-btn');
+scissors.textContent = 'Scissors';
+container.appendChild(scissors);
+scissors.addEventListener('click', () => {
+const computerSelection = getComputerChoice();
+playRound('scissors', computerSelection)
+});
+
+  const result = document.createElement('div');
+  container.appendChild(result);
+
+  const humanScored = document.createElement('p');
+  humanScored.id = 'humanScored'
+  container.appendChild(humanScored);
+
+  const computerScored = document.createElement('p');
+  computerScored.id = 'computerScored'
+  container.appendChild(computerScored);
+
+  const finalResult = document.createElement('p');
+  container.appendChild(finalResult);
